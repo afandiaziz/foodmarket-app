@@ -17,7 +17,7 @@ const SuccessSignUp = ({navigation}) => {
                 <Button
                     text="Find Foods"
                     onPress={() => {
-                        navigation.navigate('SuccessSignUp');
+                        navigation.replace('MainApp');
                     }}
                 />
             </View>
