@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {Logo} from '../../assets';
 
-export default function SplashScreen() {
+export default function SplashScreen({navigation}) {
+    useEffect(() => {
+        setTimeout(() => {
+            navigation.replace('SignIn');
+        }, 2000);
+    }, []);
+
     return (
         <View
             style={{
