@@ -27,7 +27,12 @@ export default function SignUpAddress({navigation}) {
                 <Gap height={16} />
                 <Select label="City" placeholder="Select your city" />
                 <Gap height={24} />
-                <Button text="Sign Up Now" />
+                <Button
+                    text="Sign Up Now"
+                    onPress={() => {
+                        navigation.navigate('SuccessSignUp');
+                    }}
+                />
             </View>
         </View>
     );
