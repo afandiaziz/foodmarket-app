@@ -15,7 +15,7 @@ export default TextInput;
 const styles = StyleSheet.create({
     label: {
         fontSize: 16,
-        fontFamily: 'Poppins-regular',
+        fontFamily: 'Poppins-Regular',
         color: '#020202',
         marginBottom: 6,
     },
