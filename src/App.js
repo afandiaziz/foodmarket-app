@@ -1,12 +1,7 @@
 import React from 'react';
-import {View, StatusBar, Text} from 'react-native';
+import {SplashScreen} from './pages';
 
 const App = () => {
-    return (
-        <View>
-            <StatusBar barStyle="dark-content" />
-            <Text>Hello World!</Text>
-        </View>
-    );
+    return <SplashScreen />;
 };
 export default App;
