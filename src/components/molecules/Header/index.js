@@ -1,11 +1,21 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {IconArrowBack} from '../../../assets';
 
-const Header = ({title, subTitle}) => {
+const Header = ({title, subTitle, onBack}) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subTitle}>{subTitle}</Text>
+            {onBack && (
+                <TouchableOpacity onPress={onBack}>
+                    <View style={styles.iconBack}>
+                        <IconArrowBack />
+                    </View>
+                </TouchableOpacity>
+            )}
+            <View>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.subTitle}>{subTitle}</Text>
+            </View>
         </View>
     );
 };
@@ -18,6 +28,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         paddingTop: 30,
         paddingBottom: 24,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    iconBack: {
+        padding: 16,
+        marginRight: 16,
+        marginLeft: -10,
     },
     title: {
         fontSize: 22,

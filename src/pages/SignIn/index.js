@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
 
-export default function SignIn() {
+export default function SignIn({navigation}) {
     return (
         <View style={styles.page}>
             <Header title="Sign In" subTitle="Find your best ever meal" />
@@ -20,6 +20,9 @@ export default function SignIn() {
                     text="Create New Account"
                     backgroundColor="#8D92A3"
                     textColor="#fff"
+                    onPress={() => {
+                        navigation.navigate('SignUp');
+                    }}
                 />
             </View>
         </View>
