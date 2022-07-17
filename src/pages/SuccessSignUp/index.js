@@ -3,7 +3,7 @@ import React from 'react';
 import {IllustrationSuccessSignUp} from '../../assets';
 import {Button, Gap} from '../../components';
 
-const SuccessSignUp = () => {
+const SuccessSignUp = ({navigation}) => {
     return (
         <View style={styles.page}>
             <IllustrationSuccessSignUp />
