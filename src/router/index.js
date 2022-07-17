@@ -8,18 +8,25 @@ import {
     SignUpAddress,
     SuccessSignUp,
     Home,
+    Order,
     Profile,
 } from '../pages';
+import {BottomNavigator} from '../components';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainApp = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
             <Tab.Screen
                 name="Home"
                 component={Home}
+                options={{headerShown: false}}
+            />
+            <Tab.Screen
+                name="Order"
+                component={Order}
                 options={{headerShown: false}}
             />
             <Tab.Screen

@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {IconArrowBack} from '../../../assets';
+import {IcBack} from '../../../assets';
 
 const Header = ({title, subTitle, onBack}) => {
     return (
@@ -8,7 +8,7 @@ const Header = ({title, subTitle, onBack}) => {
             {onBack && (
                 <TouchableOpacity onPress={onBack}>
                     <View style={styles.iconBack}>
-                        <IconArrowBack />
+                        <IcBack />
                     </View>
                 </TouchableOpacity>
             )}
