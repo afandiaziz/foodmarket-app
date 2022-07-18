@@ -14,7 +14,12 @@ export default function SignIn({navigation}) {
                 <Gap height={16} />
                 <TextInput label="Password" placeholder="Type your password" />
                 <Gap height={24} />
-                <Button text="Sign In" />
+                <Button
+                    text="Sign In"
+                    onPress={() => {
+                        navigation.replace('MainApp');
+                    }}
+                />
                 <Gap height={12} />
                 <Button
                     text="Create New Account"
