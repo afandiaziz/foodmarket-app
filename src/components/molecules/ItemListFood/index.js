@@ -1,52 +1,48 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
 import Rating from '../Rating';
 
-export default function ItemListFood() {
+export default function ItemListFood({image, onPress}) {
     return (
-        <View
-            style={{
-                flexDirection: 'row',
-                backgroundColor: 'white',
-                paddingHorizontal: 24,
-                paddingVertical: 8,
-                alignItems: 'center',
-            }}>
-            <Image
-                source={FoodDummy1}
-                style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    marginRight: 12,
-                }}
-            />
-            <View
-                style={{
-                    flex: 1,
-                }}>
-                <Text
-                    style={{
-                        fontSize: 16,
-                        fontFamily: 'Poppins-Regular',
-                        color: '#020202',
-                    }}>
-                    Soup Bumil
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 13,
-                        fontFamily: 'Poppins-Regular',
-                        color: '#8d92a3',
-                    }}>
-                    IDR 289.000
-                </Text>
+        <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+            <View style={styles.container}>
+                <Image source={image} style={styles.image} />
+                <View style={styles.content}>
+                    <Text style={styles.title}>Soup Bumil</Text>
+                    <Text style={styles.price}>IDR 289.000</Text>
+                </View>
+                <Rating rating={4.1} />
             </View>
-            <Rating rating={4.1} />
-        </View>
+        </TouchableOpacity>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        paddingHorizontal: 24,
+        paddingVertical: 8,
+        alignItems: 'center',
+    },
+    image: {
+        width: 60,
+        height: 60,
+        borderRadius: 8,
+        overflow: 'hidden',
+        marginRight: 12,
+    },
+    content: {
+        flex: 1,
+    },
+    title: {
+        fontSize: 16,
+        fontFamily: 'Poppins-Regular',
+        color: '#020202',
+    },
+    price: {
+        fontSize: 13,
+        fontFamily: 'Poppins-Regular',
+        color: '#8d92a3',
+    },
+});

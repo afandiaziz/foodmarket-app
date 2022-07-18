@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import ItemListFood from '../ItemListFood';
+import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
 
 const renderTabBar = props => (
     <TabBar
@@ -40,6 +42,7 @@ const renderTabBar = props => (
 );
 
 const NewTasteRoute = () => {
+    const navigation = useNavigation();
     return (
         <ScrollView>
             <View
@@ -47,17 +50,33 @@ const NewTasteRoute = () => {
                     paddingTop: 8,
                     flex: 1,
                 }}>
-                <ItemListFood />
-                <ItemListFood />
-                <ItemListFood />
-                <ItemListFood />
-                <ItemListFood />
+                <ItemListFood
+                    image={FoodDummy2}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy1}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy3}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy1}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy2}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
             </View>
         </ScrollView>
     );
 };
 
 const PopularRoute = () => {
+    const navigation = useNavigation();
     return (
         <ScrollView>
             <View
@@ -65,15 +84,33 @@ const PopularRoute = () => {
                     paddingTop: 8,
                     flex: 1,
                 }}>
-                <ItemListFood />
-                <ItemListFood />
-                <ItemListFood />
+                <ItemListFood
+                    image={FoodDummy2}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy1}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy3}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy1}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy2}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
             </View>
         </ScrollView>
     );
 };
 
 const RecommendedRoute = () => {
+    const navigation = useNavigation();
     return (
         <ScrollView>
             <View
@@ -81,9 +118,26 @@ const RecommendedRoute = () => {
                     paddingTop: 8,
                     flex: 1,
                 }}>
-                <ItemListFood />
-                <ItemListFood />
-                <ItemListFood />
+                <ItemListFood
+                    image={FoodDummy2}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy1}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy3}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy1}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
+                <ItemListFood
+                    image={FoodDummy2}
+                    onPress={() => navigation.navigate('FoodDetail')}
+                />
             </View>
         </ScrollView>
     );

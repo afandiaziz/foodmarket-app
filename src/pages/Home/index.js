@@ -52,6 +52,5 @@ const styles = StyleSheet.create({
     },
     tabContainer: {
         flex: 1,
-        // backgroundColor: 'black',
     },
 });
