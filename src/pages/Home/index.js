@@ -1,6 +1,13 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {ProfileDummy} from '../../assets';
+import {
+    ProfileDummy,
+    FoodDummy1,
+    FoodDummy2,
+    FoodDummy3,
+    FoodDummy4,
+} from '../../assets';
+import {FoodCard, Gap} from '../../components';
 
 export default function Home() {
     return (
@@ -12,7 +19,14 @@ export default function Home() {
                 </View>
                 <Image source={ProfileDummy} style={styles.profile} />
             </View>
-            <Text>index</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <View style={styles.foodCardContainer}>
+                    <Gap width={24} />
+                    <FoodCard image={FoodDummy1} name="Food Dummy 1" />
+                    <FoodCard image={FoodDummy2} name="Food Dummy 2" />
+                    <FoodCard image={FoodDummy3} name="Food Dummy 3" />
+                </View>
+            </ScrollView>
         </View>
     );
 }
@@ -40,5 +54,9 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 8,
+    },
+    foodCardContainer: {
+        flexDirection: 'row',
+        marginVertical: 24,
     },
 });
