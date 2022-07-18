@@ -1,31 +1,63 @@
+import React, {useState} from 'react';
 import {
     Image,
     ScrollView,
     StyleSheet,
     Text,
-    View,
     useWindowDimensions,
+    View,
 } from 'react-native';
-import React, {useState} from 'react';
+import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {
-    ProfileDummy,
     FoodDummy1,
     FoodDummy2,
     FoodDummy3,
     FoodDummy4,
+    ProfileDummy,
 } from '../../assets';
 import {FoodCard, Gap} from '../../components';
-import {TabView, SceneMap} from 'react-native-tab-view';
+
+const renderTabBar = props => (
+    <TabBar
+        {...props}
+        style={{backgroundColor: 'white'}}
+        tabStyle={{width: 'auto'}}
+        renderLabel={({route, focused}) => (
+            <Text
+                style={{
+                    fontFamily: 'Poppins-Medium',
+                    color: focused ? '#020202' : '#8d92a3',
+                }}>
+                {route.title}
+            </Text>
+        )}
+        indicatorStyle={{
+            backgroundColor: '#020202',
+            height: 3,
+            width: 0.5,
+            borderRadius: 10,
+
+            // marginLeft: 3,
+        }}
+    />
+);
 
 const NewTasteRoute = () => (
-    <View style={{flex: 1, backgroundColor: '#ff4081'}} />
+    <View style={{flex: 1}}>
+        <Text>Hello World</Text>
+    </View>
 );
 
 const PopularRoute = () => (
-    <View style={{flex: 1, backgroundColor: '#673ab7'}} />
+    <View style={{flex: 1}}>
+        <Text>Hello World</Text>
+    </View>
 );
+
 const RecommendedRoute = () => (
-    <View style={{flex: 1, backgroundColor: '#67aabf'}} />
+    <View style={{flex: 1}}>
+        <Text>Hello World</Text>
+    </View>
 );
 
 const renderScene = SceneMap({
@@ -65,6 +97,7 @@ export default function Home() {
             </View>
             <View style={styles.tabContainer}>
                 <TabView
+                    renderTabBar={renderTabBar}
                     navigationState={{index, routes}}
                     renderScene={renderScene}
                     onIndexChange={setIndex}
@@ -108,5 +141,6 @@ const styles = StyleSheet.create({
     },
     tabContainer: {
         flex: 1,
+        backgroundColor: 'white',
     },
 });
