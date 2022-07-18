@@ -1,13 +1,15 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
+import Rating from '../Rating';
 
-export default function FoodCard({image, name, onPress}) {
+export default function FoodCard({image, name, rating = 0, onPress}) {
     return (
         <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
             <View style={styles.container}>
                 <Image source={image} style={styles.image} />
                 <View style={styles.content}>
                     <Text style={styles.text}>{name}</Text>
+                    <Rating rating={rating} />
                 </View>
             </View>
         </TouchableOpacity>
