@@ -8,7 +8,6 @@ import {
     ScrollView,
 } from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {useForm} from '../../utils';
 
 export default function SignUp({navigation}) {
     const [form, setForm] = useForm({
@@ -24,6 +23,8 @@ export default function SignUp({navigation}) {
         navigation.navigate('SignUpAddress');
     };
 
+    const addPhoto = () => {};
+
     return (
         <ScrollView contentContainerStyle={styles.scroll}>
             <View style={styles.page}>
@@ -36,7 +37,7 @@ export default function SignUp({navigation}) {
                 />
                 <View style={styles.container}>
                     <View style={styles.photo}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={addPhoto}>
                             <View style={styles.borderPhoto}>
                                 {photo ? (
                                     <Image
