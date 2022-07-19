@@ -6,6 +6,7 @@ import HomeProfile from './HomeProfile';
 import Rating from './Rating';
 import ItemListFood from './ItemListFood';
 import ItemListMenu from './ItemListMenu';
+import Loading from './Loading';
 
 export {
     Header,
@@ -15,5 +16,5 @@ export {
     HomeProfile,
     Rating,
     ItemListFood,
-    ItemListMenu,
+    Loading,
 };
