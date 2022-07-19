@@ -2,22 +2,12 @@ import {Picker} from '@react-native-picker/picker';
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Select = ({
-    label,
-    placeholder,
-    items,
-    onSelectChange,
-    value,
-    enabled,
-    type,
-}) => {
-    console.log(type);
+const Select = ({label, placeholder, items, onSelectChange, value, type}) => {
     return (
         <View>
             <Text style={styles.label}>{label}</Text>
             <View style={styles.input}>
                 <Picker
-                    enabled={enabled}
                     placeholder={placeholder}
                     selectedValue={value}
                     onValueChange={itemValue => onSelectChange(itemValue)}>

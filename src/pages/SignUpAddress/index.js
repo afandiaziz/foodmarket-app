@@ -4,13 +4,14 @@ import {useForm} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Gap, Header, TextInput, Select} from '../../components';
+import {setLoading} from '../../redux/action';
 
 export default function SignUpAddress({navigation}) {
     const dispatch = useDispatch();
     const [provincies, setProvincies] = useState(null);
     const [provinceId, setProvinceId] = useState(1);
     const [cities, setCities] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loadingData, setLoadingData] = useState(true);
     const registerReducer = useSelector(state => state.registerReducer);
 
     const [form, setForm] = useForm({
@@ -21,7 +22,7 @@ export default function SignUpAddress({navigation}) {
     });
 
     useEffect(() => {
-        if (loading) {
+        if (loadingData) {
             axios
                 .get('https://pro.rajaongkir.com/api/province', {
                     headers: {
@@ -31,11 +32,11 @@ export default function SignUpAddress({navigation}) {
                 .then(({data}) => {
                     if (data.rajaongkir.status.code == 200) {
                         setProvincies(data.rajaongkir.results);
-                        setLoading(false);
+                        setLoadingData(false);
                     }
                 });
         }
-    }, [loading]);
+    }, [loadingData]);
 
     useEffect(() => {
         axios
@@ -59,11 +60,12 @@ export default function SignUpAddress({navigation}) {
             ...form,
             ...registerReducer,
         };
+        dispatch(setLoading(true));
     };
 
     return (
         <>
-            {!loading && provincies ? (
+            {!loadingData && provincies ? (
                 <ScrollView style={styles.scroll}>
                     <View style={styles.page}>
                         <Header
@@ -104,7 +106,6 @@ export default function SignUpAddress({navigation}) {
                             <Select
                                 label="Province"
                                 placeholder="Select your province"
-                                enabled={true}
                                 items={provincies}
                                 value={provinceId}
                                 type="province"
@@ -116,7 +117,6 @@ export default function SignUpAddress({navigation}) {
                                 placeholder="Select your city"
                                 items={cities}
                                 value={form.city}
-                                enabled={cities ? true : false}
                                 type="city"
                                 onSelectChange={value => setForm('city', value)}
                             />
