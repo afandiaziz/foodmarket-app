@@ -11,7 +11,6 @@ export default function HomeProfile() {
     useEffect(() => {
         navigation.addListener('focus', () => {
             getData('userProfile').then(res => {
-                console.log(res.profile_photo_url);
                 setPhoto({uri: res.profile_photo_url});
             });
         });

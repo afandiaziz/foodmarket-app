@@ -16,5 +16,6 @@ export {
     HomeProfile,
     Rating,
     ItemListFood,
+    ItemListMenu,
     Loading,
 };

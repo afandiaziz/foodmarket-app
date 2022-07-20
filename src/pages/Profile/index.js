@@ -2,8 +2,15 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {ItemListMenu} from '../../components';
 import {ProfileDummy} from '../../assets';
+import asyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Profile() {
+export default function Profile({navigation}) {
+    const signOut = () => {
+        asyncStorage.multiRemove(['userProfile', 'token']).then(() => {
+            navigation.reset({index: 0, routes: [{name: 'SignIn'}]});
+        });
+    };
+
     return (
         <View style={styles.page}>
             <View style={styles.profileDetail}>
@@ -29,7 +36,7 @@ export default function Profile() {
                     <ItemListMenu text="Home Address" />
                     <ItemListMenu text="Security" />
                     <ItemListMenu text="Payments" />
-                    <ItemListMenu text="Sign Out" />
+                    <ItemListMenu text="Sign Out" onPress={signOut} />
                 </View>
             </View>
         </View>
