@@ -1,12 +1,19 @@
 import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {Logo} from '../../assets';
+import {getData} from '../../utils';
 
 export default function SplashScreen({navigation}) {
     useEffect(() => {
         setTimeout(() => {
-            navigation.replace('SignIn');
-        }, 2000);
+            getData('token').then(res => {
+                if (res) {
+                    navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
+                } else {
+                    navigation.replace('SignIn');
+                }
+            });
+        }, 1000);
     }, []);
 
     return (
