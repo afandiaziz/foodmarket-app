@@ -6,7 +6,10 @@ import {
     Text,
     TouchableOpacity,
     ScrollView,
+    Image,
 } from 'react-native';
+import {useForm, showMessage} from '../../utils';
+import {launchImageLibrary} from 'react-native-image-picker';
 import {Button, Gap, Header, TextInput} from '../../components';
 
 export default function SignUp({navigation}) {
@@ -23,7 +26,30 @@ export default function SignUp({navigation}) {
         navigation.navigate('SignUpAddress');
     };
 
-    const addPhoto = () => {};
+    const addPhoto = () => {
+        launchImageLibrary(
+            {
+                quality: 0.5,
+                maxWidth: 200,
+                maxHeight: 200,
+            },
+            response => {
+                if (response.didCancel || response.error) {
+                    showMessage('Anda belum memilih photo');
+                } else {
+                    setPhoto({uri: response.assets[0].uri});
+                    const dataImage = {
+                        uri: response.assets[0].uri,
+                        type: response.assets[0].type,
+                        name: response.assets[0].fileName,
+                    };
+
+                    dispatch({type: 'SET_PHOTO', value: dataImage});
+                    dispatch({type: 'SET_UPLOAD_STATUS', value: true});
+                }
+            },
+        );
+    };
 
     return (
         <ScrollView contentContainerStyle={styles.scroll}>
@@ -102,6 +128,13 @@ const styles = StyleSheet.create({
         marginTop: 26,
         marginBottom: 16,
     },
+    photoContainer: {
+        padding: 24,
+        width: 90,
+        height: 90,
+        borderRadius: 90,
+        backgroundColor: '#f0f0f0',
+    },
     borderPhoto: {
         borderWidth: 1,
         borderColor: '#8D92A3',
@@ -111,13 +144,6 @@ const styles = StyleSheet.create({
         borderStyle: 'dashed',
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    photoContainer: {
-        padding: 24,
-        width: 90,
-        height: 90,
-        borderRadius: 90,
-        backgroundColor: '#f0f0f0',
     },
     addPhoto: {
         fontSize: 14,

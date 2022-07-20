@@ -4,7 +4,7 @@ import {useForm} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Gap, Header, TextInput, Select} from '../../components';
-import {setLoading} from '../../redux/action';
+import {setLoading, signUpAction} from '../../redux/action';
 
 export default function SignUpAddress({navigation}) {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export default function SignUpAddress({navigation}) {
     const [provinceId, setProvinceId] = useState(1);
     const [cities, setCities] = useState(null);
     const [loadingData, setLoadingData] = useState(true);
-    const registerReducer = useSelector(state => state.registerReducer);
+    const {registerReducer, photoReducer} = useSelector(state => state);
 
     const [form, setForm] = useForm({
         phoneNumber: '',
@@ -24,9 +24,9 @@ export default function SignUpAddress({navigation}) {
     useEffect(() => {
         if (loadingData) {
             axios
-                .get('https://pro.rajaongkir.com/api/province', {
+                .get('https://api.rajaongkir.com/starter/province', {
                     headers: {
-                        key: '50888c314eceb4b7487e2f528fd4fa10',
+                        key: 'd3ea6f226ea66889f5f71faf5d962d1b',
                     },
                 })
                 .then(({data}) => {
@@ -40,9 +40,9 @@ export default function SignUpAddress({navigation}) {
 
     useEffect(() => {
         axios
-            .get('https://pro.rajaongkir.com/api/city', {
+            .get('https://api.rajaongkir.com/starter/city', {
                 headers: {
-                    key: '50888c314eceb4b7487e2f528fd4fa10',
+                    key: 'd3ea6f226ea66889f5f71faf5d962d1b',
                 },
                 params: {
                     province: provinceId,
@@ -51,6 +51,10 @@ export default function SignUpAddress({navigation}) {
             .then(({data}) => {
                 if (data.rajaongkir.status.code == 200) {
                     setCities(data.rajaongkir.results);
+                    setForm(
+                        'city',
+                        `${data.rajaongkir.results[0].type} ${data.rajaongkir.results[0].city_name}`,
+                    );
                 }
             });
     }, [provinceId]);
@@ -61,6 +65,7 @@ export default function SignUpAddress({navigation}) {
             ...registerReducer,
         };
         dispatch(setLoading(true));
+        dispatch(signUpAction(data, photoReducer, navigation));
     };
 
     return (

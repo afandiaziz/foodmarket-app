@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
+import {API_HOST} from '../../config';
 import {useForm} from '../../utils';
 
 export default function SignIn({navigation}) {
@@ -8,6 +10,18 @@ export default function SignIn({navigation}) {
         email: '',
         password: '',
     });
+
+    const onSubmit = () => {
+        // axios
+        //     .post(`${API_HOST.url}/register`)
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(err => {
+        //         console.log(`${API_HOST.url}/food`);
+        //         console.log(err);
+        //     });
+    };
     return (
         <View style={styles.page}>
             <Header title="Sign In" subTitle="Find your best ever meal" />
@@ -27,12 +41,7 @@ export default function SignIn({navigation}) {
                     secureTextEntry
                 />
                 <Gap height={24} />
-                <Button
-                    text="Sign In"
-                    onPress={() => {
-                        navigation.replace('MainApp');
-                    }}
-                />
+                <Button text="Sign In" onPress={onSubmit} />
                 <Gap height={12} />
                 <Button
                     text="Create New Account"
