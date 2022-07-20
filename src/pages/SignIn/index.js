@@ -1,26 +1,19 @@
-import axios from 'axios';
 import React from 'react';
+import {useForm} from '../../utils';
+import {useDispatch} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {API_HOST} from '../../config';
-import {useForm} from '../../utils';
+import {signInAction} from '../../redux/action';
 
 export default function SignIn({navigation}) {
+    const dispatch = useDispatch();
     const [form, setForm] = useForm({
         email: '',
         password: '',
     });
 
     const onSubmit = () => {
-        // axios
-        //     .post(`${API_HOST.url}/register`)
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(err => {
-        //         console.log(`${API_HOST.url}/food`);
-        //         console.log(err);
-        //     });
+        dispatch(signInAction(form, navigation));
     };
     return (
         <View style={styles.page}>

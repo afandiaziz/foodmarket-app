@@ -78,6 +78,13 @@ export const signInAction = (form, navigation) => dispatch => {
         })
         .catch(err => {
             dispatch(setLoading(false));
-            showMessage(err?.response?.data?.data?.message);
+            let errMessages = '';
+            for (let key in err.response.data.data.error) {
+                err.response.data.data.error[key].map(msg => {
+                    errMessages +=
+                        errMessages == '' ? '- ' + msg : '\n- ' + msg;
+                });
+            }
+            showMessage(errMessages);
         });
 };
