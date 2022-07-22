@@ -82,7 +82,6 @@ export const signInAction = (form, navigation) => dispatch => {
         })
         .catch(err => {
             dispatch(setLoading(false));
-            console.log(err.response);
             if (err.response.data.data.error) {
                 let errMessages = '';
                 for (let key in err.response.data.data.error) {

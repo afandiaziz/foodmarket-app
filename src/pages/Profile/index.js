@@ -1,10 +1,85 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import axios from 'axios';
+import {API_HOST} from '../../config';
 import {ItemListMenu} from '../../components';
-import {ProfileDummy} from '../../assets';
+import React, {useState, useEffect} from 'react';
+import ImagePicker from 'react-native-image-picker';
+import {getData, showMessage, storeData} from '../../utils';
 import asyncStorage from '@react-native-async-storage/async-storage';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
 export default function Profile({navigation}) {
+    const [userProfile, setUserProfile] = useState({});
+
+    const updateUserProfile = () => {
+        getData('userProfile').then(res => {
+            console.log(res);
+            setUserProfile(res);
+        });
+    };
+
+    useEffect(() => {
+        navigation.addListener('focus', () => {
+            updateUserProfile();
+        });
+    }, [navigation]);
+
+    const updatePhoto = () => {
+        ImagePicker.launchImageLibrary(
+            {
+                quality: 0.7,
+                maxWidth: 200,
+                maxHeight: 200,
+            },
+            response => {
+                if (response.didCancel || response.error) {
+                    showMessage('Anda tidak memilih photo');
+                } else {
+                    const dataImage = {
+                        uri: response.uri,
+                        type: response.type,
+                        name: response.fileName,
+                    };
+
+                    const photoForUpload = new FormData();
+                    photoForUpload.append('file', dataImage);
+                    getData('token').then(resToken => {
+                        axios
+                            .post(
+                                `${API_HOST.url}/user/photo`,
+                                photoForUpload,
+                                {
+                                    headers: {
+                                        Authorization: resToken.value,
+                                        'Content-Type': 'multipart/form-data',
+                                    },
+                                },
+                            )
+                            .then(res => {
+                                getData('userProfile').then(resUser => {
+                                    showMessage(
+                                        'Update Photo Berhasil',
+                                        'success',
+                                    );
+                                    resUser.profile_photo_url = `${API_HOST.storage}/${res.data.data[0]}`;
+                                    storeData('userProfile', resUser).then(
+                                        () => {
+                                            updateUserProfile();
+                                        },
+                                    );
+                                });
+                            })
+                            .catch(err => {
+                                showMessage(
+                                    `${err?.response?.data?.message} on Update Photo API` ||
+                                        'Terjadi kesalahan di API Update Photo',
+                                );
+                            });
+                    });
+                }
+            },
+        );
+    };
+
     const signOut = () => {
         asyncStorage.multiRemove(['userProfile', 'token']).then(() => {
             navigation.reset({index: 0, routes: [{name: 'SignIn'}]});
@@ -15,17 +90,17 @@ export default function Profile({navigation}) {
         <View style={styles.page}>
             <View style={styles.profileDetail}>
                 <View style={styles.photo}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={updatePhoto}>
                         <View style={styles.borderPhoto}>
                             <Image
-                                source={ProfileDummy}
+                                source={{uri: userProfile.profile_photo_url}}
                                 style={styles.photoContainer}
                             />
                         </View>
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.name}>Afandi Aziz</Text>
-                <Text style={styles.email}>afandiaziz46@gmail.com</Text>
+                <Text style={styles.name}>{userProfile.name}</Text>
+                <Text style={styles.email}>{userProfile.email}</Text>
             </View>
             <View style={styles.content}>
                 <View style={styles.containerAccount}>
