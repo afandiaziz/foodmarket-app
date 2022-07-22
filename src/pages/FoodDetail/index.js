@@ -1,18 +1,21 @@
 import {
     ImageBackground,
+    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
 } from 'react-native';
 import React from 'react';
-import {FoodDummy6, IcBackWhite} from '../../assets';
+import {IcBackWhite} from '../../assets';
 import {Button, Rating} from '../../components';
 
-export default function FoodDetail({name, navigation}) {
+export default function FoodDetail({navigation, route}) {
     return (
         <View style={styles.page}>
-            <ImageBackground source={FoodDummy6} style={styles.cover}>
+            <ImageBackground
+                source={{uri: route.params.picturePath}}
+                style={styles.cover}>
                 <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.buttonBack}
@@ -22,24 +25,28 @@ export default function FoodDetail({name, navigation}) {
             </ImageBackground>
             <View style={styles.container}>
                 <View style={styles.mainContent}>
-                    <View style={styles.productContainer}>
-                        <Text style={styles.title}>Food 1</Text>
-                        <Rating rating={4} />
-                    </View>
-                    <Text style={styles.description}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Quia natus nobis illum consequatur velit repellat,
-                        explicabo modi dicta, saepe eligendi cumque quasi quo
-                        expedita corporis hic, blanditiis delectus numquam
-                        laudantium?
-                    </Text>
-                    <Text style={styles.ingredientsTitle}>Ingredients</Text>
-                    <Text style={styles.description}>Bawang, Garam</Text>
+                    <ScrollView>
+                        <View style={styles.productContainer}>
+                            <Text style={styles.title}>
+                                {route.params.name}
+                            </Text>
+                            <Rating rating={route.params.rate} />
+                        </View>
+                        <Text style={styles.description}>
+                            {route.params.description}
+                        </Text>
+                        <Text style={styles.ingredientsTitle}>Ingredients</Text>
+                        <Text style={styles.description}>
+                            {route.params.ingredients}
+                        </Text>
+                    </ScrollView>
                 </View>
                 <View style={styles.footerContainer}>
                     <View style={styles.priceContainer}>
                         <Text style={styles.priceTitle}>Total Price</Text>
-                        <Text style={styles.totalPrice}>IDR. 290.000</Text>
+                        <Text style={styles.totalPrice}>
+                            IDR. {route.params.price}
+                        </Text>
                     </View>
                     <View style={styles.button}>
                         <Button text="Order Now" />
