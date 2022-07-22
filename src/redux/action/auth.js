@@ -53,14 +53,18 @@ export const signUpAction =
             })
             .catch(err => {
                 dispatch(setLoading(false));
-                let errMessages = '';
-                for (let key in err.response.data.data.error) {
-                    err.response.data.data.error[key].map(msg => {
-                        errMessages +=
-                            errMessages == '' ? '- ' + msg : '\n- ' + msg;
-                    });
+                if (err.response.data.data.error) {
+                    let errMessages = '';
+                    for (let key in err.response.data.data.error) {
+                        err.response.data.data.error[key].map(msg => {
+                            errMessages +=
+                                errMessages == '' ? '- ' + msg : '\n- ' + msg;
+                        });
+                    }
+                    showMessage(errMessages);
+                } else {
+                    showMessage(err.response.data.data.message);
                 }
-                showMessage(errMessages);
             });
     };
 
@@ -78,13 +82,18 @@ export const signInAction = (form, navigation) => dispatch => {
         })
         .catch(err => {
             dispatch(setLoading(false));
-            let errMessages = '';
-            for (let key in err.response.data.data.error) {
-                err.response.data.data.error[key].map(msg => {
-                    errMessages +=
-                        errMessages == '' ? '- ' + msg : '\n- ' + msg;
-                });
+            console.log(err.response);
+            if (err.response.data.data.error) {
+                let errMessages = '';
+                for (let key in err.response.data.data.error) {
+                    err.response.data.data.error[key].map(msg => {
+                        errMessages +=
+                            errMessages == '' ? '- ' + msg : '\n- ' + msg;
+                    });
+                }
+                showMessage(errMessages);
+            } else {
+                showMessage(err.response.data.data.message);
             }
-            showMessage(errMessages);
         });
 };

@@ -2,16 +2,16 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Rating from '../Rating';
 
-export default function ItemListFood({image, onPress}) {
+export default function ItemListFood({image, onPress, rating, price, name}) {
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
             <View style={styles.container}>
                 <Image source={image} style={styles.image} />
                 <View style={styles.content}>
-                    <Text style={styles.title}>Soup Bumil</Text>
-                    <Text style={styles.price}>IDR 289.000</Text>
+                    <Text style={styles.title}>{name}</Text>
+                    <Text style={styles.price}>IDR {price}</Text>
                 </View>
-                <Rating rating={4.1} />
+                <Rating rating={rating} />
             </View>
         </TouchableOpacity>
     );

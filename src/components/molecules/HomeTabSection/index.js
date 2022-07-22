@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     StyleSheet,
     Text,
@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import ItemListFood from '../ItemListFood';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
+import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {getFoodDataByTypes} from '../../../redux/action';
 
 const renderTabBar = props => (
     <TabBar
@@ -43,6 +44,12 @@ const renderTabBar = props => (
 
 const NewTasteRoute = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const {newTaste} = useSelector(state => state.homeReducer);
+
+    useEffect(() => {
+        dispatch(getFoodDataByTypes('new_food'));
+    }, []);
     return (
         <ScrollView>
             <View
@@ -50,26 +57,20 @@ const NewTasteRoute = () => {
                     paddingTop: 8,
                     flex: 1,
                 }}>
-                <ItemListFood
-                    image={FoodDummy2}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy1}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy3}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy1}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy2}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
+                {newTaste.map(item => {
+                    return (
+                        <ItemListFood
+                            key={item.id}
+                            name={item.name}
+                            price={item.price}
+                            rating={item.rate}
+                            image={{uri: item.picturePath}}
+                            onPress={() =>
+                                navigation.navigate('FoodDetail', item)
+                            }
+                        />
+                    );
+                })}
             </View>
         </ScrollView>
     );
@@ -77,6 +78,13 @@ const NewTasteRoute = () => {
 
 const PopularRoute = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const {popular} = useSelector(state => state.homeReducer);
+
+    useEffect(() => {
+        dispatch(getFoodDataByTypes('popular'));
+    }, []);
+
     return (
         <ScrollView>
             <View
@@ -84,26 +92,20 @@ const PopularRoute = () => {
                     paddingTop: 8,
                     flex: 1,
                 }}>
-                <ItemListFood
-                    image={FoodDummy2}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy1}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy3}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy1}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy2}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
+                {popular.map(item => {
+                    return (
+                        <ItemListFood
+                            key={item.id}
+                            name={item.name}
+                            price={item.price}
+                            rating={item.rate}
+                            image={{uri: item.picturePath}}
+                            onPress={() =>
+                                navigation.navigate('FoodDetail', item)
+                            }
+                        />
+                    );
+                })}
             </View>
         </ScrollView>
     );
@@ -111,6 +113,12 @@ const PopularRoute = () => {
 
 const RecommendedRoute = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const {recommended} = useSelector(state => state.homeReducer);
+
+    useEffect(() => {
+        dispatch(getFoodDataByTypes('recommended'));
+    }, []);
     return (
         <ScrollView>
             <View
@@ -118,26 +126,20 @@ const RecommendedRoute = () => {
                     paddingTop: 8,
                     flex: 1,
                 }}>
-                <ItemListFood
-                    image={FoodDummy2}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy1}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy3}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy1}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
-                <ItemListFood
-                    image={FoodDummy2}
-                    onPress={() => navigation.navigate('FoodDetail')}
-                />
+                {recommended.map(item => {
+                    return (
+                        <ItemListFood
+                            key={item.id}
+                            name={item.name}
+                            price={item.price}
+                            rating={item.rate}
+                            image={{uri: item.picturePath}}
+                            onPress={() =>
+                                navigation.navigate('FoodDetail', item)
+                            }
+                        />
+                    );
+                })}
             </View>
         </ScrollView>
     );
