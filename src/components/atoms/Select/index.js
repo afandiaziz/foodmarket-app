@@ -10,6 +10,7 @@ const Select = ({label, placeholder, items, onSelectChange, value, type}) => {
                 <Picker
                     placeholder={placeholder}
                     selectedValue={value}
+                    style={styles.select}
                     onValueChange={itemValue => onSelectChange(itemValue)}>
                     {items &&
                         items.map((item, index) => (
@@ -24,6 +25,7 @@ const Select = ({label, placeholder, items, onSelectChange, value, type}) => {
                                         ? item.province_id
                                         : item.city_id
                                 }
+                                style={styles.select}
                                 key={index}
                             />
                         ))}
@@ -48,5 +50,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 2,
         paddingVertical: 0,
+    },
+    select: {
+        fontFamily: 'Poppins-Regular',
+        color: '#020202',
     },
 });

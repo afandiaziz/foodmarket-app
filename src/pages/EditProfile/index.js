@@ -161,7 +161,7 @@ const EditProfile = ({navigation, route}) => {
                     <TextInput
                         label="Email Address"
                         placeholder="Type your email address"
-                        value={form.email}
+                        value={userProfile.email}
                         editable={false}
                         onChangeText={value => setForm('email', value)}
                     />

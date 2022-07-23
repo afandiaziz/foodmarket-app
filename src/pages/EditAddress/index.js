@@ -3,10 +3,18 @@ import React, {useEffect, useState} from 'react';
 import {API_HOST} from '../../config';
 import {getData, showMessage, storeData, useForm} from '../../utils';
 import {Gap, Button, Header, Select, TextInput} from '../../components';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {
+    PermissionsAndroid,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    View,
+} from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 
 const EditAddress = ({navigation, route}) => {
     const [cities, setCities] = useState(null);
+    const [address, setAddress] = useState(route.params.address);
     const [provincies, setProvincies] = useState(null);
     const [loadingData, setLoadingData] = useState(true);
     const [cityId, setCityId] = useState(String(route.params.city));
@@ -63,12 +71,57 @@ const EditAddress = ({navigation, route}) => {
         });
     };
 
+    const getOneTimeLocation = () => {
+        Geolocation.getCurrentPosition(
+            ({coords}) => {
+                axios
+                    .get(API_HOST.gmapsUrl, {
+                        params: {
+                            key: API_HOST.gmapsKey,
+                            latlng: `${coords.latitude},${coords.longitude}`,
+                        },
+                    })
+                    .then(({data}) => {
+                        setAddress(data.results[0].formatted_address);
+                        setForm('address', data.results[0].formatted_address);
+                    });
+            },
+            error => {
+                showMessage(error);
+            },
+            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        );
+    };
+
+    const currentLocationHandler = async () => {
+        if (Platform.OS === 'ios') {
+            getOneTimeLocation();
+        } else {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                    {
+                        title: 'Location Access Required',
+                        message: 'This app needs to access your location',
+                    },
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    getOneTimeLocation();
+                } else {
+                    showMessage('Permission Denied');
+                }
+            } catch (error) {
+                showMessage(error);
+            }
+        }
+    };
+
     useEffect(() => {
         if (loadingData) {
             axios
                 .get('https://api.rajaongkir.com/starter/province', {
                     headers: {
-                        key: 'd3ea6f226ea66889f5f71faf5d962d1b',
+                        key: API_HOST.rajaongkirKey,
                     },
                 })
                 .then(({data}) => {
@@ -84,7 +137,7 @@ const EditAddress = ({navigation, route}) => {
         axios
             .get('https://api.rajaongkir.com/starter/city', {
                 headers: {
-                    key: 'd3ea6f226ea66889f5f71faf5d962d1b',
+                    key: API_HOST.rajaongkirKey,
                 },
                 params: {
                     province: provinceId,
@@ -110,8 +163,17 @@ const EditAddress = ({navigation, route}) => {
                     <TextInput
                         label="Address"
                         placeholder="Type your address"
-                        value={form.address}
-                        onChangeText={value => setForm('address', value)}
+                        value={address}
+                        onChangeText={value => {
+                            setAddress(value);
+                            setForm('address', value);
+                        }}
+                    />
+                    <Gap height={16} />
+                    <Button
+                        text="Get My Location"
+                        backgroundColor="#8D92A3"
+                        onPress={currentLocationHandler}
                     />
                     <Gap height={16} />
                     <TextInput
