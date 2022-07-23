@@ -85,7 +85,6 @@ export default function SignUpAddress({navigation}) {
                     },
                 })
                 .then(({data}) => {
-                    console.log(data.rajaongkir.results);
                     if (data.rajaongkir.status.code == 200) {
                         setProvincies(data.rajaongkir.results);
                         setLoadingData(false);
