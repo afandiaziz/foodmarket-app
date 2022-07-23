@@ -1,4 +1,4 @@
-package com.foodmarketapp.newarchitecture;
+package com.uas.ti6a.muhammadafandiaziz.wizzfood.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.foodmarketapp.BuildConfig;
-import com.foodmarketapp.newarchitecture.components.MainComponentsRegistry;
-import com.foodmarketapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.uas.ti6a.muhammadafandiaziz.wizzfood.BuildConfig;
+import com.uas.ti6a.muhammadafandiaziz.wizzfood.newarchitecture.components.MainComponentsRegistry;
+import com.uas.ti6a.muhammadafandiaziz.wizzfood.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

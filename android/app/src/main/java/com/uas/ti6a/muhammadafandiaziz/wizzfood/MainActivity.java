@@ -1,4 +1,4 @@
-package com.foodmarketapp;
+package com.uas.ti6a.muhammadafandiaziz.wizzfood;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

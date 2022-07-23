@@ -1,4 +1,4 @@
-package com.foodmarketapp.newarchitecture.components;
+package com.uas.ti6a.muhammadafandiaziz.wizzfood.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

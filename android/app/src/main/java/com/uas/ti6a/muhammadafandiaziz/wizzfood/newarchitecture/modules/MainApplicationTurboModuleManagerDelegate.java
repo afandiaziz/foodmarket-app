@@ -1,4 +1,4 @@
-package com.foodmarketapp.newarchitecture.modules;
+package com.uas.ti6a.muhammadafandiaziz.wizzfood.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

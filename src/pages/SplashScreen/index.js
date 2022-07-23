@@ -32,7 +32,7 @@ export default function SplashScreen({navigation}) {
                     color: '#020202',
                     fontFamily: 'Poppins-Medium',
                 }}>
-                FoodMarket
+                WIZZ Food
             </Text>
         </View>
     );
