@@ -9,7 +9,7 @@ import {setLoading, signUpAction} from '../../redux/action';
 export default function SignUpAddress({navigation}) {
     const dispatch = useDispatch();
     const [provincies, setProvincies] = useState(null);
-    const [provinceId, setProvinceId] = useState(1);
+    const [provinceId, setProvinceId] = useState('1');
     const [cities, setCities] = useState(null);
     const [loadingData, setLoadingData] = useState(true);
     const {registerReducer, photoReducer} = useSelector(state => state);
@@ -19,6 +19,7 @@ export default function SignUpAddress({navigation}) {
         address: '',
         houseNumber: '',
         city: '',
+        province: '',
     });
 
     useEffect(() => {
@@ -39,6 +40,7 @@ export default function SignUpAddress({navigation}) {
     }, [loadingData]);
 
     useEffect(() => {
+        setForm('province', provinceId);
         axios
             .get('https://api.rajaongkir.com/starter/city', {
                 headers: {

@@ -22,7 +22,7 @@ const Select = ({label, placeholder, items, onSelectChange, value, type}) => {
                                 value={
                                     type == 'province'
                                         ? item.province_id
-                                        : `${item.type} ${item.city_name}`
+                                        : item.city_id
                                 }
                                 key={index}
                             />
