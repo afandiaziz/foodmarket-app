@@ -22,7 +22,7 @@ export default function HomeProfile() {
     return (
         <View style={styles.profileContainer}>
             <View>
-                <Text style={styles.appName}>FoodMarket</Text>
+                <Text style={styles.appName}>WIZZ Food</Text>
                 <Text style={styles.desc}>Let’s get some foods</Text>
             </View>
             {photo && <Image source={photo} style={styles.profile} />}
