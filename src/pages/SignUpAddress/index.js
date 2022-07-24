@@ -44,6 +44,7 @@ export default function SignUpAddress({navigation}) {
                     })
                     .then(({data}) => {
                         setAddress(data.results[0].formatted_address);
+                        setForm('address', data.results[0].formatted_address);
                     });
             },
             error => {
@@ -187,7 +188,7 @@ export default function SignUpAddress({navigation}) {
                                 type="city"
                                 onSelectChange={value => {
                                     setCityId(value);
-                                    setForm('city', cityId);
+                                    setForm('city', value);
                                 }}
                             />
                             <Gap height={24} />

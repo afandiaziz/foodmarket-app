@@ -211,7 +211,7 @@ const EditAddress = ({navigation, route}) => {
                         type="city"
                         onSelectChange={value => {
                             setCityId(value);
-                            setForm('city', cityId);
+                            setForm('city', value);
                         }}
                     />
                     <Gap height={24} />
